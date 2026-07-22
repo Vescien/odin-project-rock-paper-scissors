@@ -37,5 +37,22 @@ function getHumanChoice() {
     return humanChoice;
 }
 
-console.log(getComputerChoice())
-console.log(getHumanChoice())
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice === computerChoice) {
+        return "Tie!"
+    } else if (humanChoice === "rock" && computerChoice === "scissors") {
+        return "Player win!"
+    } else if (humanChoice === "paper" && computerChoice === "rock") {
+        return "Player win!"
+    } else if (humanChoice === "scissors" && computerChoice === "paper") {
+        return "Player win!"
+    } else {
+        return "Computer win!"
+    }
+}
+
+let player = getHumanChoice();
+let computer = getComputerChoice();
+console.log(player);
+console.log(computer);
+console.log(playRound(player, computer));
