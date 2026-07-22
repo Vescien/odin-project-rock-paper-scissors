@@ -56,10 +56,13 @@ function playGame() {
     let computerScore = 0;
     let currentRound = 0;
 
+    // Loop through each round
     for (let i = 0; i < rounds; i++) {
         let player = getHumanChoice();
         let computer = getComputerChoice();
         let result = playRound(player, computer);
+
+        // Update round and score
         if (result === "tie") {
             currentRound++;
             console.log(`Round: ${currentRound} - Tie!`);
@@ -73,14 +76,17 @@ function playGame() {
             console.log(`Round: ${currentRound} - Computer wins!`);
         }
 
+        // Capitilize choice's first letter
+        player = player.charAt(0).toUpperCase() + player.slice(1);
+        computer = computer.charAt(0).toUpperCase() + computer.slice(1);
+
+        // Display round choice
         console.log(`Player: ${player}`);
         console.log(`Computer: ${computer}`);
         console.log("");
     }
 
-    console.log(`Player score: ${playerScore}`);
-    console.log(`Computer score: ${computerScore}`);
-
+    // Display final result
     if (playerScore === computerScore) {
         console.log("It's a tie!");
     } else if (playerScore > computerScore) {
@@ -88,6 +94,8 @@ function playGame() {
     } else {
         console.log("Computer won!");
     }
+    console.log(`Player score: ${playerScore}`);
+    console.log(`Computer score: ${computerScore}`);
 }
 
 playGame();
