@@ -32,4 +32,10 @@ function getComputerChoice() {
     }
 }
 
+function getHumanChoice() {
+    let humanChoice = prompt("Type: Rock, Paper or Scissors.").toLowerCase();
+    return humanChoice;
+}
+
 console.log(getComputerChoice())
+console.log(getHumanChoice())
