@@ -19,3 +19,17 @@ show who the winner is
     - else computer wins, return value
 - Keep track of overall score and best of 5 wins, function playGame()
 */
+
+
+function getComputerChoice() {
+    let computerChoice = Math.floor(Math.random() * 3)
+    if (computerChoice === 0) {
+        return "rock";
+    } else if (computerChoice === 1) {
+        return "paper";
+    } else {
+        return "scissors";
+    }
+}
+
+console.log(getComputerChoice())
