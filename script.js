@@ -83,7 +83,7 @@ function playGame() {
         // Display round choice
         console.log(`Player: ${player}`);
         console.log(`Computer: ${computer}`);
-        console.log("");
+        console.log("\n");
     }
 
     // Display final result
