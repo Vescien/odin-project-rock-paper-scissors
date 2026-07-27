@@ -69,11 +69,8 @@ function playGame(playerChoice) {
     round.textContent = `Round: ${currentRound}`;
     displayPlayerScore.textContent = playerScore;
     displayComputerScore.textContent = computerScore;
-    let roundInfo = `Round: ${currentRound} - Player ${player} x ${computer} Computer`;
-    let list = document.createElement("li");
-    list.textContent = roundInfo;
-    history.appendChild(list);
 
+    updateHistory(player, computer);
     currentRound++;
 
     let finalWinner = "";
@@ -91,25 +88,34 @@ function playGame(playerChoice) {
     }
 
     displayWinner.textContent = finalWinner;
-
-    reset.addEventListener("click", () => {
-        playerScore = 0;
-        computerScore = 0;
-        currentRound = 1;
-        displayPlayerChoice.textContent = "";
-        displayComputerChoice.textContent = "";
-        round.textContent = `Round: ${currentRound}`;
-        displayPlayerScore.textContent = playerScore;
-        displayComputerScore.textContent = computerScore;
-
-        buttons.forEach(button => {
-        button.disabled = false;
-        })
-        finalWinner = "";
-        displayWinner.textContent = finalWinner;
-        history.replaceChildren();
-    })
 }
+
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
+    currentRound = 1;
+    displayPlayerChoice.textContent = "";
+    displayComputerChoice.textContent = "";
+    round.textContent = `Round: ${currentRound}`;
+    displayPlayerScore.textContent = playerScore;
+    displayComputerScore.textContent = computerScore;
+
+    buttons.forEach(button => {
+        button.disabled = false;
+    })
+
+    displayWinner.textContent = "";
+    history.replaceChildren();
+}
+
+function updateHistory(playerInfo, computerInfo) {
+    let roundInfo = `Round: ${currentRound} - Player ${playerInfo} x ${computerInfo} Computer`;
+    let list = document.createElement("li");
+    list.textContent = roundInfo;
+    history.appendChild(list);
+}
+
+reset.addEventListener("click", resetGame);
 
 getHumanChoice();
 
