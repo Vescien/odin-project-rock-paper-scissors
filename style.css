@@ -1,5 +1,11 @@
 html {
     box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: bisque;
 }
 
 *,
@@ -9,6 +15,7 @@ html {
     padding: 0;
     margin: 0;
 }
+
 
 .container {
     display: flex;
@@ -35,14 +42,40 @@ html {
     font-size: 100px;
     width: 150px;
     height: 150px;
+    background-color: white;
+    border-radius: 20px;
     border: 2px solid black;
 }
 
 .button-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
     margin: 30px 0;
 }
 
-.buttons {
+.buttons, .reset {
     font-size: 30px;
     padding: 2px 20px;
+    border-radius: 10px;
+}
+
+
+.result {
+    font-size: 40px;
+    height: 100px;
+}
+
+.history {
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    width: 300px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: white;
+}
+
+ol {
+    list-style: none;
 }

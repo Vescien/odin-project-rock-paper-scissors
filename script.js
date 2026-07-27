@@ -4,11 +4,14 @@ const scissors = document.querySelector("#scissors");
 const round = document.querySelector(".round");
 const displayPlayerScore = document.querySelector(".player-score")
 const displayComputerScore = document.querySelector(".computer-score")
-const winner = document.querySelector(".result");
+const displayWinner = document.querySelector(".result");
 const displayPlayerChoice = document.querySelector("#player-choice");
 const displayComputerChoice = document.querySelector("#computer-choice");
+const history = document.querySelector(".history-list");
+const buttons = document.querySelectorAll(".buttons");
+const reset = document.querySelector(".reset");
 
-const rounds = 3;
+const rounds = 5;
 let playerScore = 0;
 let computerScore = 0;
 let currentRound = 1;
@@ -44,7 +47,7 @@ function playRound(humanChoice, computerChoice) {
     } else if (humanChoice === "🧻" && computerChoice === "✊") {
         return "player-win"
     } else if (humanChoice === "✂" && computerChoice === "🧻") {
-        return "player win"
+        return "player-win"
     } else {
         return "computer-win"
     }
@@ -55,15 +58,10 @@ function playGame(playerChoice) {
     let computer = getComputerChoice();
     let result = playRound(player, computer);
 
-    // Update round and score
-    if (result === "tie") {
-        console.log(`Round: ${currentRound} - Tie!`);
-    } else if (result === "player-win") {
+    if (result === "player-win") {
         playerScore++;
-        console.log(`Round: ${currentRound} - Player wins!`);
-    } else {
+    } else if (result === "computer-win") {
         computerScore++;
-        console.log(`Round: ${currentRound} - Computer wins!`);
     }
 
     displayPlayerChoice.textContent = player;
@@ -71,23 +69,46 @@ function playGame(playerChoice) {
     round.textContent = `Round: ${currentRound}`;
     displayPlayerScore.textContent = playerScore;
     displayComputerScore.textContent = computerScore;
+    let roundInfo = `Round: ${currentRound} - Player ${player} x ${computer} Computer`;
+    let list = document.createElement("li");
+    list.textContent = roundInfo;
+    history.appendChild(list);
+
     currentRound++;
 
     let finalWinner = "";
     if (currentRound - 1 === rounds) {
         if (playerScore === computerScore) {
-            finalWinner = "It's a tie!";
+            finalWinner = "Draw!";
         } else if (playerScore > computerScore) {
             finalWinner = "Player won!"
         } else {
             finalWinner = "Computer won!"
         }
+        buttons.forEach(button => {
+            button.disabled = true;
+        })
+    }
 
+    displayWinner.textContent = finalWinner;
+
+    reset.addEventListener("click", () => {
         playerScore = 0;
         computerScore = 0;
         currentRound = 1;
-    }
-    winner.textContent = finalWinner;
+        displayPlayerChoice.textContent = "";
+        displayComputerChoice.textContent = "";
+        round.textContent = `Round: ${currentRound}`;
+        displayPlayerScore.textContent = playerScore;
+        displayComputerScore.textContent = computerScore;
+
+        buttons.forEach(button => {
+        button.disabled = false;
+        })
+        finalWinner = "";
+        displayWinner.textContent = finalWinner;
+        history.replaceChildren();
+    })
 }
 
 getHumanChoice();
