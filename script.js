@@ -1,6 +1,10 @@
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
+const round = document.querySelector(".round");
+const displayPlayerScore = document.querySelector(".player-score")
+const displayComputerScore = document.querySelector(".computer-score")
+const winner = document.querySelector(".result");
 
 const rounds = 3;
 let playerScore = 0;
@@ -59,37 +63,26 @@ function playGame(playerChoice) {
         computerScore++;
         console.log(`Round: ${currentRound} - Computer wins!`);
     }
+    round.textContent = `Round: ${currentRound}`;
+    displayPlayerScore.textContent = playerScore;
+    displayComputerScore.textContent = computerScore;
     currentRound++;
 
-    // Capitilize choice's first letter
-    player = player.charAt(0).toUpperCase() + player.slice(1);
-    computer = computer.charAt(0).toUpperCase() + computer.slice(1);
-
-    // Display round choice
-    console.log(`Player: ${player}`);
-    console.log(`Computer: ${computer}`);
-    console.log("\n");
-
-    // Display final result
-    // console.log(`Player score: ${playerScore}`);
-    // console.log(`Computer score: ${computerScore}`);
-    // console.log("\n");
-
+    let finalWinner = "";
     if (currentRound - 1 === rounds) {
-
         if (playerScore === computerScore) {
-            console.log("It's a tie!");
+            finalWinner = "It's a tie!";
         } else if (playerScore > computerScore) {
-            console.log("Player won!");
+            finalWinner = "Player won!"
         } else {
-            console.log("Computer won!");
+            finalWinner = "Computer won!"
         }
-        console.log("\n");
 
         playerScore = 0;
         computerScore = 0;
         currentRound = 1;
     }
+    winner.textContent = finalWinner;
 }
 
 getHumanChoice();
