@@ -27,7 +27,12 @@ html {
     text-align: center;
 }
 
+.player-score, .computer-score {
+    font-size: 40px;
+}
+
 .thumbnail {
+    font-size: 100px;
     width: 150px;
     height: 150px;
     border: 2px solid black;

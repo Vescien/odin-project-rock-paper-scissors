@@ -5,6 +5,8 @@ const round = document.querySelector(".round");
 const displayPlayerScore = document.querySelector(".player-score")
 const displayComputerScore = document.querySelector(".computer-score")
 const winner = document.querySelector(".result");
+const displayPlayerChoice = document.querySelector("#player-choice");
+const displayComputerChoice = document.querySelector("#computer-choice");
 
 const rounds = 3;
 let playerScore = 0;
@@ -13,35 +15,35 @@ let currentRound = 1;
 
 function getHumanChoice() {
     rock.addEventListener("click", () => {
-        playGame("rock");
+        playGame("✊");
     });
     paper.addEventListener("click", () => {
-        playGame("paper");
+        playGame("🧻");
     });
     scissors.addEventListener("click", () => {
-        playGame("scissors");
+        playGame("✂");
     });
 }
 
 function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3)
     if (computerChoice === 0) {
-        return "rock";
+        return "✊";
     } else if (computerChoice === 1) {
-        return "paper";
+        return "🧻";
     } else {
-        return "scissors";
+        return "✂";
     }
 }
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         return "tie"
-    } else if (humanChoice === "rock" && computerChoice === "scissors") {
+    } else if (humanChoice === "✊" && computerChoice === "✂") {
         return "player-win"
-    } else if (humanChoice === "paper" && computerChoice === "rock") {
+    } else if (humanChoice === "🧻" && computerChoice === "✊") {
         return "player-win"
-    } else if (humanChoice === "scissors" && computerChoice === "paper") {
+    } else if (humanChoice === "✂" && computerChoice === "🧻") {
         return "player win"
     } else {
         return "computer-win"
@@ -63,6 +65,9 @@ function playGame(playerChoice) {
         computerScore++;
         console.log(`Round: ${currentRound} - Computer wins!`);
     }
+
+    displayPlayerChoice.textContent = player;
+    displayComputerChoice.textContent = computer;
     round.textContent = `Round: ${currentRound}`;
     displayPlayerScore.textContent = playerScore;
     displayComputerScore.textContent = computerScore;
