@@ -63,10 +63,10 @@ function playGame(playerChoice) {
         roundWinner.textContent = "Draw!";
     } else if (result === "player-win") {
         playerScore++;
-        roundWinner.textContent = "Player win!";
+        roundWinner.textContent = "Player wins!";
     } else if (result === "computer-win") {
         computerScore++;
-        roundWinner.textContent = "Computer win!";
+        roundWinner.textContent = "Computer wins!";
     }
 
     displayPlayerChoice.textContent = player;
@@ -81,11 +81,11 @@ function playGame(playerChoice) {
     let finalWinner = "";
     if (currentRound - 1 === rounds) {
         if (playerScore === computerScore) {
-            finalWinner = "Draw!";
+            finalWinner = "The game is a draw!";
         } else if (playerScore > computerScore) {
-            finalWinner = "Player won!"
+            finalWinner = "Player won the game!"
         } else {
-            finalWinner = "Computer won!"
+            finalWinner = "Computer won the game!"
         }
         buttons.forEach(button => {
             button.disabled = true;
