@@ -2,6 +2,7 @@ const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
 const round = document.querySelector(".round");
+const roundWinner = document.querySelector(".round-winner");
 const displayPlayerScore = document.querySelector(".player-score")
 const displayComputerScore = document.querySelector(".computer-score")
 const displayWinner = document.querySelector(".result");
@@ -58,10 +59,14 @@ function playGame(playerChoice) {
     let computer = getComputerChoice();
     let result = playRound(player, computer);
 
-    if (result === "player-win") {
+    if (player === computer) {
+        roundWinner.textContent = "Draw!";
+    } else if (result === "player-win") {
         playerScore++;
+        roundWinner.textContent = "Player win!";
     } else if (result === "computer-win") {
         computerScore++;
+        roundWinner.textContent = "Computer win!";
     }
 
     displayPlayerChoice.textContent = player;
@@ -105,6 +110,7 @@ function resetGame() {
     })
 
     displayWinner.textContent = "";
+    roundWinner.textContent = "";
     history.replaceChildren();
 }
 
