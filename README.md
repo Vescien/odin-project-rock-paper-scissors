@@ -1,1 +1,1 @@
-# odin-project-rock-paper-scissors
+Live preview: https://vescien.github.io/odin-project-rock-paper-scissors/
