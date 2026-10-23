@@ -24,6 +24,10 @@
     padding: 0;
 }
 
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* ---------- Page ---------- */
 html {
     background: var(--bg);
@@ -167,10 +171,6 @@ h1 {
     text-shadow: 0 0 8px rgba(45, 238, 251, 0.7);
 }
 
-.header p {
-    font-size: 2.5rem;
-}
-
 .info.cpu .header h1 {
     color: var(--pink);
     text-shadow: 0 0 8px rgba(250, 60, 237, 0.7);
@@ -179,7 +179,7 @@ h1 {
 .player-score,
 .computer-score {
     font-family: var(--body);
-    font-size: 32px;
+    font-size: 2.5rem;
     color: #fff;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
@@ -223,13 +223,18 @@ h1 {
     gap: 1.4rem;
 }
 
-.versus h1 {
+.versus-title,
+.versus-title-mobile {
     font-family: var(--body);
     font-size: 44px;
     color: var(--yellow);
     text-shadow:
         3px 3px 0 rgba(250, 60, 237, 0.6),
         0 0 16px rgba(255, 229, 78, 0.6);
+}
+
+.versus-title-mobile {
+    display: none;
 }
 
 .versus p {
@@ -338,4 +343,60 @@ h1 {
 
 .reset:hover {
     box-shadow: 0 0 14px rgba(255, 229, 78, 0.5);
+}
+
+@media (max-width: 700px) {
+    .title {
+        font-size: 2rem;
+    }
+
+    .round {
+        font-size: .9rem;
+    }
+
+    .middle-container {
+        grid-template-columns: 1fr auto 1fr;
+    }
+
+    .versus {
+        grid-row: 2 / 3;
+        grid-column: span 3;
+    }
+
+    .player-score,
+    .computer-score {
+        font-size: 2rem;
+    }
+
+    .thumbnail {
+        height: 140px;
+    }
+
+    .thumbnail svg {
+        height: 4rem;
+    }
+
+    .versus-title {
+        display: none;
+    }
+
+    .versus p {
+        font-size: 1.4rem;
+    }
+
+    .versus-title-mobile {
+        font-size: 1.5rem;
+        text-align: center;
+        display: block;
+    }
+
+    .button-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .buttons {
+        height: 80px;
+    }
 }
