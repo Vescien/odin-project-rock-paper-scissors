@@ -185,6 +185,10 @@ h1 {
     border: 2px dashed var(--cyan);
 }
 
+.thumbnail svg {
+    height: 7rem;
+}
+
 #computer-choice {
     color: var(--pink);
     text-shadow: 0 0 12px var(--pink);
@@ -217,8 +221,12 @@ h1 {
 }
 
 .versus p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: var(--body);
     font-weight: 700;
+    height: 100px;
     width: 100%;
     padding: 1.1rem 1rem;
     text-align: center;
@@ -318,23 +326,4 @@ h1 {
 
 .reset:hover {
     box-shadow: 0 0 14px rgba(255, 229, 78, 0.5);
-}
-
-.history {
-    border-top: 2px dashed rgba(167, 157, 224, 0.35);
-    padding-top: 1rem;
-}
-
-.history:has(.history-list:empty) {
-    display: none;
-}
-
-.history-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    font-size: 0.95rem;
-    letter-spacing: 0.04em;
-    color: var(--muted);
 }

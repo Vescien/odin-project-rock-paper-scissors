@@ -11,43 +11,65 @@ const displayComputerChoice = document.querySelector("#computer-choice");
 const history = document.querySelector(".history-list");
 const buttons = document.querySelectorAll(".buttons");
 const reset = document.querySelector(".reset");
+const versusText = document.querySelector(".versus-text");
+const playerText = document.querySelector(".player-choice-text");
+const computerText = document.querySelector(".computer-choice-text");
 
 const rounds = 5;
 let playerScore = 0;
 let computerScore = 0;
 let currentRound = 1;
 
+const SVG_ATTRS = `xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+    stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"`;
+
+const ICONS = {
+    rock: `<svg ${SVG_ATTRS}>
+        <path d="M8 4.5 L15 4 L20 8.5 L21 15 L16.5 20 L9 20.5 L3.5 15.5 L4 9 Z" />
+    </svg>`,
+    paper: `<svg ${SVG_ATTRS}>
+        <path d="M6 3 H14 L19 8 V21 H6 Z M14 3 V8 H19 M9.5 12.5 H15.5 M9.5 15.5 H15.5 M9.5 18.5 H13" />
+    </svg>`,
+    scissors: `<svg ${SVG_ATTRS}>
+        <circle cx="5.5" cy="6" r="2.6" />
+        <circle cx="5.5" cy="18" r="2.6" />
+        <path d="M8 7.5 L21 17.5 M8 16.5 L21 6.5" />
+    </svg>`,
+};
+
+function showChoice(element, choice) {
+    if (choice) {
+        element.innerHTML = ICONS[choice];
+    } else {
+        element.textContent = "?";
+    }
+}
+
 function getHumanChoice() {
-    rock.addEventListener("click", () => {
-        playGame("✊");
-    });
-    paper.addEventListener("click", () => {
-        playGame("🧻");
-    });
-    scissors.addEventListener("click", () => {
-        playGame("✂");
-    });
+    rock.addEventListener("click", () => playGame("rock"));
+    paper.addEventListener("click", () => playGame("paper"));
+    scissors.addEventListener("click", () => playGame("scissors"));
 }
 
 function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3)
     if (computerChoice === 0) {
-        return "✊";
+        return "rock";
     } else if (computerChoice === 1) {
-        return "🧻";
+        return "paper";
     } else {
-        return "✂";
+        return "scissors";
     }
 }
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         return "tie"
-    } else if (humanChoice === "✊" && computerChoice === "✂") {
+    } else if (humanChoice === "rock" && computerChoice === "scissors") {
         return "player-win"
-    } else if (humanChoice === "🧻" && computerChoice === "✊") {
+    } else if (humanChoice === "paper" && computerChoice === "rock") {
         return "player-win"
-    } else if (humanChoice === "✂" && computerChoice === "🧻") {
+    } else if (humanChoice === "scissors" && computerChoice === "paper") {
         return "player-win"
     } else {
         return "computer-win"
@@ -60,22 +82,28 @@ function playGame(playerChoice) {
     let result = playRound(player, computer);
 
     if (player === computer) {
-        roundWinner.textContent = "Draw!";
+        playerText.textContent = player;
+        computerText.textContent = computer;
+        versusText.textContent = "Draw!";
     } else if (result === "player-win") {
         playerScore++;
-        roundWinner.textContent = "Player wins!";
+        playerText.textContent = player;
+        computerText.textContent = computer;
+        versusText.textContent = "Player wins!";
     } else if (result === "computer-win") {
         computerScore++;
-        roundWinner.textContent = "Computer wins!";
+        playerText.textContent = player;
+        computerText.textContent = computer;
+        versusText.textContent = "Computer wins!";
     }
 
-    displayPlayerChoice.textContent = player;
-    displayComputerChoice.textContent = computer;
-    round.textContent = `Round: ${currentRound}`;
+    showChoice(displayPlayerChoice, player);
+    showChoice(displayComputerChoice, computer);
+    round.textContent = `Round: ${currentRound} / ${rounds}`;
     displayPlayerScore.textContent = playerScore;
     displayComputerScore.textContent = computerScore;
 
-    updateHistory(player, computer);
+    // updateHistory(player, computer);
     currentRound++;
 
     let finalWinner = "";
@@ -90,18 +118,21 @@ function playGame(playerChoice) {
         buttons.forEach(button => {
             button.disabled = true;
         })
+        versusText.textContent = finalWinner;
     }
 
-    displayWinner.textContent = finalWinner;
+    
 }
 
 function resetGame() {
     playerScore = 0;
     computerScore = 0;
     currentRound = 1;
-    displayPlayerChoice.textContent = "";
-    displayComputerChoice.textContent = "";
-    round.textContent = `Round: ${currentRound}`;
+    displayPlayerChoice.textContent = "?";
+    displayComputerChoice.textContent = "?";
+    playerText.textContent = "waiting";
+    computerText.textContent = "ready";
+    round.textContent = `Round: ${currentRound} / ${rounds}`;
     displayPlayerScore.textContent = playerScore;
     displayComputerScore.textContent = computerScore;
 
@@ -111,7 +142,7 @@ function resetGame() {
 
     displayWinner.textContent = "";
     roundWinner.textContent = "";
-    history.replaceChildren();
+    // history.replaceChildren();
 }
 
 function updateHistory(playerInfo, computerInfo) {
@@ -122,27 +153,4 @@ function updateHistory(playerInfo, computerInfo) {
 }
 
 reset.addEventListener("click", resetGame);
-
 getHumanChoice();
-
-/*
-Write a rock, paper, scissors program that the human can play against 
-the computer, no need for GUI, results should be displayed in the browser's
-console, no need to reprompt user in case of invalid input, the program
-should keep track of both player and computer scores and after 5 rounds
-show who the winner is
-
-- Get computer choice and return it, function getComputerChoice()
-    - Generate random number between 0-2 and convert each value to
-    to rock, paper or scissors
-- Get human choice and return it, function getHumanChoice()
-    - Prompt the user for input, convert to lower case for easier
-    comparison with computer choice
-- Compare human choice against computer choice, function playRound()
-    - if both pick same it's a tie, return value
-    - if human picks rock and computer picks scissor, player wins, return value
-    - if human picks paper and compuer picks rock, player wins, return value
-    - if human picks scissor and ocmpuer picks paper, player wins, return value
-    - else computer wins, return value
-- Keep track of overall score and best of 5 wins, function playGame()
-*/
