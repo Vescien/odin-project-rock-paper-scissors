@@ -14,6 +14,7 @@ const reset = document.querySelector(".reset");
 const versusText = document.querySelector(".versus-text");
 const playerText = document.querySelector(".player-choice-text");
 const computerText = document.querySelector(".computer-choice-text");
+const pips = document.querySelectorAll(".round-pip");
 
 const rounds = 5;
 let playerScore = 0;
@@ -82,19 +83,13 @@ function playGame(playerChoice) {
     let result = playRound(player, computer);
 
     if (player === computer) {
-        playerText.textContent = player;
-        computerText.textContent = computer;
-        versusText.textContent = "Draw!";
+        updateDisplay(player, computer, "Draw", "draw");
     } else if (result === "player-win") {
         playerScore++;
-        playerText.textContent = player;
-        computerText.textContent = computer;
-        versusText.textContent = "Player wins!";
+        updateDisplay(player, computer, "Player wins", "player-win");
     } else if (result === "computer-win") {
         computerScore++;
-        playerText.textContent = player;
-        computerText.textContent = computer;
-        versusText.textContent = "Computer wins!";
+        updateDisplay(player, computer, "Computer wins", "computer-win");
     }
 
     showChoice(displayPlayerChoice, player);
@@ -102,9 +97,8 @@ function playGame(playerChoice) {
     round.textContent = `Round: ${currentRound} / ${rounds}`;
     displayPlayerScore.textContent = playerScore;
     displayComputerScore.textContent = computerScore;
-
-    // updateHistory(player, computer);
     currentRound++;
+    console.log(currentRound);
 
     let finalWinner = "";
     if (currentRound - 1 === rounds) {
@@ -119,9 +113,14 @@ function playGame(playerChoice) {
             button.disabled = true;
         })
         versusText.textContent = finalWinner;
-    }
+    } 
+}
 
-    
+function updateDisplay(player, computer, msg, tag) {
+    playerText.textContent = player;
+    computerText.textContent = computer;
+    versusText.textContent = msg;
+    pips[currentRound - 1].id = tag;
 }
 
 function resetGame() {
@@ -135,14 +134,15 @@ function resetGame() {
     round.textContent = `Round: ${currentRound} / ${rounds}`;
     displayPlayerScore.textContent = playerScore;
     displayComputerScore.textContent = computerScore;
+    versusText.textContent = "Pick your weapon to start round 1."
+
+    pips.forEach(pip => {
+        pip.id = "";
+    })
 
     buttons.forEach(button => {
         button.disabled = false;
     })
-
-    displayWinner.textContent = "";
-    roundWinner.textContent = "";
-    // history.replaceChildren();
 }
 
 function updateHistory(playerInfo, computerInfo) {

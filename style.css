@@ -116,6 +116,18 @@ h1 {
     box-shadow: 0 0 8px var(--muted);
 }
 
+#player-win {
+    background-color: var(--cyan);
+}
+
+#computer-win {
+    background-color: var(--pink);
+}
+
+#draw {
+    background-color: var(--yellow);
+}
+
 /* ---------- Arena ---------- */
 .middle-container {
     display: grid;
