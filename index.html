@@ -3,36 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
     <div class="container">
-        
-
-        <div class="info">
-            <div class="player-info">
-                <h1>Player</h1>
-                <div class="thumbnail" id="player-choice"></div>
-                <p class="player-score">0</p>
-            </div>
-            <div class="computer-info">
-                <h1>Computer</h1>
-                <div class="thumbnail" id="computer-choice"></div>
-                <p class="computer-score">0</p>
+        <div class="top-container">
+            <h1 class="title">ROCK PAPER SCISSORS</h1>
+            <div class="round-info">
+                <h1 class="round">Round: 1 / 5</h1>
+                <div class="pips">
+                    <span class="round-pip"></span>
+                    <span class="round-pip"></span>
+                    <span class="round-pip"></span>
+                    <span class="round-pip"></span>
+                    <span class="round-pip"></span>
+                </div>
             </div>
         </div>
-        <h1 class="round">Round: 1</h1>
+
+        <div class="middle-container">
+            <div class="info">
+                <div class="header">
+                    <h1>YOU</h1>
+                    <p class="player-score">0</p>
+                </div>
+                <div class="thumbnail" id="player-choice">?</div>
+                <p>Ready</p>
+            </div>
+
+            <div class="versus">
+                <h1>VS</h1>
+                <p>Pick your weapon to start round 1.</p>
+            </div>
+
+            <div class="info cpu">
+                <div class="header">
+                    <h1>CPU</h1>
+                    <p class="computer-score">0</p>
+                </div>
+                <div class="thumbnail" id="computer-choice">?</div>
+                <p>Waiting</p>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button class="buttons" id="rock"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M8 4.5 L15 4 L20 8.5 L21 15 L16.5 20 L9 20.5 L3.5 15.5 L4 9 Z" />
+            </svg>
+ROCK</button>
+            <button class="buttons" id="paper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+                <path d="M6 3 H14 L19 8 V21 H6 Z M14 3 V8 H19 M9.5 12.5 H15.5 M9.5 15.5 H15.5 M9.5 18.5 H13" />
+            </svg>
+PAPER</button>
+            <button class="buttons" id="scissors"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+                <circle cx="5.5" cy="6" r="2.6" />
+                <circle cx="5.5" cy="18" r="2.6" />
+                <path d="M8 7.5 L21 17.5 M8 16.5 L21 6.5" />
+            </svg>
+SCISSORS</button>
+        </div>
+        
         <h1 class="round-winner"></h1>
 
         <button class="reset">Reset</button>
-
-        <div class="button-container">
-            <button class="buttons" id="rock">✊</button>
-            <button class="buttons" id="paper">🧻</button>
-            <button class="buttons" id="scissors">✂</button> 
-        </div>
 
         <div class="result"></div>
 
